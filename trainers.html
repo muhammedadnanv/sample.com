@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXSTEG Fit Hub - Trainers</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Teko:wght@600;700&display=swap" rel="stylesheet">
+    <link href="style.css">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        /* --- CSS VARIABLES & GLOBAL STYLES --- */
+        :root {
+            --color-bg: #0A0A0A;
+            --color-card-bg: #1C1C1C;
+            --color-primary: #8A2BE2; /* Vibrant Purple */
+            --color-purple-dark: #4B0082;
+            --color-white: #FFFFFF;
+            --color-text: #BDBDBD;
+            --color-heading: #FFFFFF;
+            --color-star: #FFD700;
+            --font-heading: 'Teko', sans-serif;
+            --font-body: 'Poppins', sans-serif;
+            --section-padding: 6rem 0;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body { font-family: var(--font-body); background-color: var(--color-bg); color: var(--color-text); line-height: 1.7; overflow-x: hidden; }
+        h1, h2, h3, h4 { font-family: var(--font-heading); color: var(--color-heading); line-height: 1.1; font-weight: 700; text-transform: uppercase; }
+        p { margin-bottom: 1rem; }
+        a { color: var(--color-white); text-decoration: none; transition: color 0.3s ease; }
+        img { max-width: 100%; display: block; }
+        .container { width: 90%; max-width: 1280px; margin: 0 auto; }
+        section { position: relative; overflow: hidden; }
+
+        .btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.7rem 1.4rem; border-radius: 50px; font-weight: 500; font-family: var(--font-body); transition: all 0.3s ease; border: 1px solid var(--color-primary); }
+        .btn-primary { background: var(--color-bg); color: var(--color-white); }
+        .btn-primary:hover { background: var(--color-primary); color: var(--color-white); }
+        .btn-primary i { background-color: var(--color-primary); border-radius: 50%; width: 24px; height: 24px; display: grid; place-items: center; transition: transform 0.3s ease; }
+        .btn-primary:hover i { transform: translateX(5px); }
+
+        .section-header { text-align: center; margin-bottom: 4rem; }
+        .section-subtitle { font-family: var(--font-body); font-size: 1.2rem; margin-bottom: 0; font-weight: 500; text-transform: none; color: var(--color-primary); }
+        .section-title { font-size: clamp(3rem, 10vw, 5rem); }
+        .purple-highlight { color: var(--color-primary); }
+
+        /* --- HEADER & NAVIGATION --- */
+        .main-header { padding: 1rem 0; position: absolute; top: 0; left: 0; width: 100%; z-index: 1000; }
+        .navbar { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-family: var(--font-heading); font-size: 2.5rem; font-weight: 600; display: flex; align-items: center; gap: 0.2rem; }
+        .logo-highlight { font-family: 'Poppins', sans-serif; color: var(--color-primary); font-weight: 600; font-style: italic;}
+        .logo-subtext { font-size: 0.6rem; font-family: var(--font-body); color: var(--color-text); letter-spacing: 2px; position: relative; top: 5px; left: -10px; }
+        .nav-menu { display: none; }
+        .nav-toggle { display: block; background: transparent; border: none; cursor: pointer; z-index: 1001; }
+        .hamburger { display: block; width: 25px; height: 2px; background: var(--color-white); position: relative; transition: transform 0.3s ease; }
+        .hamburger::before, .hamburger::after { content: ''; position: absolute; width: 100%; height: 2px; background: var(--color-white); left: 0; transition: all 0.3s ease; }
+        .hamburger::before { top: -8px; } .hamburger::after { bottom: -8px; }
+        .nav-open .hamburger { background: transparent; }
+        .nav-open .hamburger::before { transform: rotate(45deg); top: 0; }
+        .nav-open .hamburger::after { transform: rotate(-45deg); bottom: 0; }
+        .nav-open .nav-menu { display: flex; flex-direction: column; align-items: center; justify-content: center; position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(13, 13, 13, 0.95); backdrop-filter: blur(10px); }
+        .nav-open .nav-links { flex-direction: column; gap: 2rem; margin-bottom: 2rem; text-align: center; font-size: 1.5rem; }
+        .nav-links { list-style: none; display: flex; gap: 2.5rem; align-items: center; }
+        .nav-links a { font-weight: 500; padding-bottom: 0.5rem; border-bottom: 2px solid transparent; }
+        .nav-links a.active { color: var(--color-white); border-bottom-color: var(--color-primary); }
+
+        /* --- HERO SECTION --- */
+        .hero { padding: 12rem 0 6rem; }
+        .hero::after { content: ''; position: absolute; top: 0; right: 0; width: 65%; height: 100%; background: linear-gradient(120deg, var(--color-primary) 0%, var(--color-purple-dark) 100%); clip-path: polygon(30% 0, 100% 0, 100% 100%, 0% 100%); z-index: 1; }
+        .hero-container { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 2rem; }
+        .hero-title { font-size: clamp(4rem, 12vw, 6.5rem); line-height: 1; }
+        .hero-image img { margin-top: 2rem; filter: drop-shadow(0 20px 30px rgba(0,0,0,0.5)); }
+
+        /* --- JOURNEY SECTION --- */
+        .journey { padding: var(--section-padding); }
+        .journey-container { display: flex; flex-direction: column; gap: 3rem; align-items: center; }
+        .section-heading-alt { font-size: clamp(1.8rem, 5vw, 2.5rem); text-transform: none; line-height: 1.4; color: var(--color-white); max-width: 30ch;}
+        .journey-video { position: relative; cursor: pointer; border-radius: 15px; overflow: hidden; }
+        .play-btn { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(26, 26, 26, 0.4); border: 2px solid var(--color-white); width: 70px; height: 70px; border-radius: 50%; display: grid; place-items: center; color: var(--color-white); font-size: 1.5rem; backdrop-filter: blur(5px); transition: all 0.3s ease; }
+        .play-btn:hover { background: var(--color-primary); border-color: var(--color-primary); transform: translate(-50%, -50%) scale(1.1); }
+
+        /* --- TRAINERS SECTION --- */
+        .trainers { padding: var(--section-padding); background-image: linear-gradient(135deg, var(--color-bg) 60%, var(--color-purple-dark) 150%); }
+        .trainers .section-header .section-title { color: var(--color-white); }
+        .trainers-grid { display: grid; gap: 2rem; }
+        .trainer-card { background: var(--color-card-bg); border-radius: 20px; overflow: hidden; display: flex; flex-direction: column; }
+        .trainer-image-wrapper { position: relative; height: 400px; }
+        .trainer-image-wrapper img { width: 100%; height: 100%; object-fit: cover; object-position: top center; border-radius: 20px 20px 0 0; }
+        .trainer-image-wrapper::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 70%; background: linear-gradient(to top, rgba(28,28,28,1) 30%, rgba(28,28,28,0)); }
+        .trainer-overlay-info { position: absolute; bottom: 0; left: 0; width: 100%; padding: 1.5rem; z-index: 2; }
+        .trainer-overlay-info h3 { font-size: 2.8rem; line-height: 1; }
+        .trainer-overlay-info p { font-size: 1rem; font-weight: 500; margin: 0; color: var(--color-white); text-transform: none; }
+        .trainer-details { padding: 1.5rem; }
+        .trainer-details p { font-size: 0.9rem; margin-bottom: 1rem; }
+        .trainer-details .trainer-specialties { font-size: 0.9rem; margin: 0; }
+        .trainer-details .trainer-specialties span { color: var(--color-primary); font-weight: 600; }
+
+        /* --- TESTIMONIALS SECTION --- */
+        .testimonials { padding: var(--section-padding); }
+        .testimonials::before { content: ''; position: absolute; top: 0; left: -10%; width: 60%; height: 100%; background: linear-gradient(120deg, var(--color-purple-dark) 0%, var(--color-primary) 100%); clip-path: polygon(0 0, 80% 0, 100% 100%, 0% 100%); z-index: 0; opacity: 0.4; }
+        .testimonials .container { position: relative; z-index: 1; }
+        .testimonials .section-header .section-title { color: var(--color-white); }
+        .testimonials .section-tagline { font-style: italic; color: var(--color-text); text-transform: none; }
+        .testimonials-grid { display: grid; gap: 5rem 1.5rem; margin-top: 8rem; }
+        .testimonial-card { background-color: var(--color-card-bg); border-radius: 15px; padding: 1.5rem; text-align: center; position: relative; }
+        .testimonial-card img { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; position: absolute; top: -60px; left: 50%; transform: translateX(-50%); border: 5px solid var(--color-bg); }
+        .testimonial-content { margin-top: 60px; /* Space for the image */ }
+        .testimonial-content h4 { font-size: 1.5rem; }
+        .rating { color: var(--color-star); margin-bottom: 1rem; }
+        .testimonial-content blockquote { font-size: 0.95rem; font-style: normal; position: relative; text-transform: none; }
+        .testimonial-content blockquote::before { content: '\201C'; font-family: serif; font-size: 4rem; color: var(--color-primary); position: absolute; top: -1.8rem; left: 50%; transform: translateX(-50%); opacity: 0.3; line-height: 1; }
+
+        /* --- CONTACT SECTION --- */
+        .contact { padding: var(--section-padding); background-image: url('https://i.imgur.com/gK1H0GN.png'); background-size: cover; background-position: center; }
+        .contact .section-title { font-size: clamp(3rem, 10vw, 6rem); text-align: center; }
+        .contact .section-title .purple-highlight { display: block; }
+        .contact-card-wrapper { display: flex; justify-content: center; margin-top: 4rem; }
+        .contact-card { width: 100%; max-width: 900px; background: rgba(26, 26, 26, 0.5); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 20px; padding: 2rem; backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); }
+        .contact-info { list-style: none; margin-bottom: 2rem; display: flex; flex-direction: column; gap: 1.5rem; align-items: flex-start; }
+        .contact-info li, .contact-info a { display: flex; align-items: center; gap: 1rem; font-size: 1.1rem; }
+        .contact-info li i { color: var(--color-primary); font-size: 1.8rem; width: 30px; text-align: center; }
+        .social-links { display: flex; justify-content: center; gap: 1rem; background: var(--color-bg); padding: 1rem; border-radius: 50px; max-width: 320px; margin: 2rem auto 0; }
+        .social-links a { width: 50px; height: 50px; background: var(--color-primary); color: var(--color-white); border-radius: 50%; display: grid; place-items: center; font-size: 1.2rem; transition: all 0.3s ease; }
+        .social-links a:hover { background: var(--color-white); color: var(--color-primary); transform: translateY(-5px); }
+        
+        /* --- FOOTER --- */
+        .main-footer { padding: 2rem 0; text-align: center; font-size: 0.9rem; color: var(--color-text); background-color: #000; }
+
+        /* --- RESPONSIVENESS --- */
+        @media (min-width: 768px) {
+            .nav-toggle { display: none; }
+            .nav-menu { display: flex; align-items: center; }
+            .nav-links { list-style: none; display: flex; gap: 2.5rem; }
+            .nav-cta { margin-left: 2.5rem; }
+            .hero-container { flex-direction: row; align-items: center; text-align: left; }
+            .hero-content { flex-basis: 50%; }
+            .hero-image { flex-basis: 50%; }
+            .journey-container { flex-direction: row; gap: 4rem; text-align: left; }
+            .journey-text, .journey-video { flex: 1; }
+            .trainers-grid { grid-template-columns: repeat(2, 1fr); }
+            .testimonials-grid { grid-template-columns: repeat(2, 1fr); }
+            .contact-info { flex-direction: row; justify-content: space-between; align-items: center; flex-wrap: wrap; }
+            .contact .section-title .purple-highlight { display: inline; }
+        }
+
+        @media (min-width: 1024px) {
+            .hero-title br { display: block; }
+            .trainers-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+        
+        @media (min-width: 1200px) {
+            .testimonials-grid { grid-template-columns: repeat(4, 1fr); }
+        }
+        
+        /* Accessibility Focus States */
+        a:focus-visible, button:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 3px; border-radius: 4px; }
+    </style>
+</head>
+<body>
+
+    <header class="main-header">
+        <nav class="navbar container">
+            <a href="#" class="logo">
+                NEX<span class="logo-highlight">S</span>TEG
+               
+            </a>
+            <button class="nav-toggle" aria-label="toggle navigation" aria-expanded="false"><span class="hamburger"></span></button>
+            <div class="nav-menu">
+                <ul class="nav-links">
+                    <li><a href="/index.html">Home</a></li>
+                    <li><a href="/aboutus.html">About</a></li>
+                    <li><a href="/trainers.html" class="active">Trainers</a></li>
+                    <li><a href="/pricing.html">Pricing</a></li>
+                    <li><a href="/sucess.html">Success Story</a></li>
+                </ul>
+                <a href="https://wa.me/919999999999" class="btn btn-primary nav-cta">contact us<i class="fas fa-arrow-right"></i></a>
+                 <button class="nav-toggle" aria-label="toggle navigation">
+                <span class="hamburger"></span>
+            </button>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container hero-container">
+                <div class="hero-content">
+                    <h1 class="hero-title">Meet The<br>Trainers<br>Who Make It<br>Happen</h1>
+                </div>
+                <div class="hero-image"><img src="https://i.imgur.com/G5gJvyl.png" alt="Bodybuilder performing a bicep curl"></div>
+            </div>
+        </section>
+
+        <!-- Journey Section -->
+        <section class="journey">
+            <div class="container journey-container">
+                <div class="journey-text">
+                    <h2 class="section-heading-alt">Your journey starts with a team that truly cares. Every rep, every session, we're with you.</h2>
+                    <p>At NEXSTEG, our trainers don't just guide workouts — they guide transformations. Every member of our coaching team is passionate about fitness and committed to helping you break limits, smash goals, and stay consistent. Whether you're here to lose weight, gain muscle, boost endurance, or rebuild strength — we've got the right trainer for you.</p>
+                </div>
+                <div class="journey-video">
+                    <img src="https://i.imgur.com/uP1J3yS.png" alt="Trainer assisting a client with lunges and barbell">
+                    <button class="play-btn" aria-label="Play video"><i class="fas fa-play"></i></button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Trainers Section -->
+        <section class="trainers">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">More Than Just Trainers - We're <span class="purple-highlight">Your Partners In Progress</span></h2>
+                </div>
+                <div class="trainers-grid">
+                    <article class="trainer-card">
+                        <div class="trainer-image-wrapper">
+                            <img src="https://i.imgur.com/vHqY7bE.png" alt="Portrait of trainer Ali Hameed">
+                            <div class="trainer-overlay-info">
+                                <h3>Ali Hameed</h3>
+                                <p>Head Coach - Strength & Conditioning Specialist</p>
+                            </div>
+                        </div>
+                        <div class="trainer-details">
+                            <p>With over 10 years of experience in professional fitness coaching, Ali leads the NEXSTEG training team. His philosophy is simple: consistency beats intensity.</p>
+                            <p class="trainer-specialties"><span>Specialties:</span> Muscle gain, weightlifting, body recomposition</p>
+                        </div>
+                    </article>
+                    <article class="trainer-card">
+                        <div class="trainer-image-wrapper">
+                            <img src="https://i.imgur.com/4gW5T9u.png" alt="Portrait of trainer Mohammed Rashid">
+                            <div class="trainer-overlay-info">
+                                <h3>Mohammed Rashid</h3>
+                                <p>Certified Nutrition Coach & Personal Trainer</p>
+                            </div>
+                        </div>
+                        <div class="trainer-details">
+                            <p>Mohammed combines science-backed meal planning with targeted HIIT and strength training. He's helped hundreds of members transform their bodies.</p>
+                            <p class="trainer-specialties"><span>Specialties:</span> Nutrition planning, fat loss, functional training</p>
+                        </div>
+                    </article>
+                    <article class="trainer-card">
+                        <div class="trainer-image-wrapper">
+                            <img src="https://i.imgur.com/w1iY1aR.png" alt="Portrait of trainer Sarah Mutairi">
+                            <div class="trainer-overlay-info">
+                                <h3>Sarah Mutairi</h3>
+                                <p>Yoga & Flexibility Trainer</p>
+                            </div>
+                        </div>
+                        <div class="trainer-details">
+                            <p>Certified yoga instructor with a background in physical therapy, Sarah focuses on holistic wellness, mobility, and injury prevention.</p>
+                            <p class="trainer-specialties"><span>Specialties:</span> Yoga, injury recovery, mobility training</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section class="testimonials">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">What Our Clients Say</h2>
+                    <p class="section-tagline">"Training with NEXSTEG changed my life."</p>
+                </div>
+                <div class="testimonials-grid">
+                    <article class="testimonial-card">
+                        <img src="https://i.imgur.com/79S9o9W.png" alt="Portrait of client Fahad A.">
+                        <div class="testimonial-content">
+                            <h4>Fahad A.</h4>
+                            <div class="rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                            <blockquote>"Ali Helped Me Gain 8kg Of Muscle In Just 5 Months. His Attention To Form And Consistency Was The Game-Changer."</blockquote>
+                        </div>
+                    </article>
+                    <article class="testimonial-card">
+                        <img src="https://i.imgur.com/R3zK7s3.png" alt="Portrait of client Dana R.">
+                        <div class="testimonial-content">
+                            <h4>Dana R.</h4>
+                            <div class="rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                            <blockquote>"Sarah's Yoga Sessions Are My Favorite Part Of The Week. My Back Pain Is Gone, And I Feel Lighter Mentally."</blockquote>
+                        </div>
+                    </article>
+                     <article class="testimonial-card">
+                        <img src="https://i.imgur.com/h5T27zJ.png" alt="Portrait of client Jhon">
+                        <div class="testimonial-content">
+                            <h4>Jhon</h4>
+                            <div class="rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                            <blockquote>"Lorem Ipsum Dolor Sit Amet, Consectetur Adipiscing Elit. Vestibulum Faucibus"</blockquote>
+                        </div>
+                    </article>
+                     <article class="testimonial-card">
+                        <img src="https://i.imgur.com/D47Nf0C.png" alt="Portrait of client Ezekiel">
+                        <div class="testimonial-content">
+                            <h4>Ezekiel</h4>
+                            <div class="rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                            <blockquote>"Lorem Ipsum Dolor Sit Amet, Consectetur Adipiscing Elit. Vestibulum Faucibus"</blockquote>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #000;
+      color: white;
+    }
+    .section-title {
+      text-align: center;
+      font-size: 2rem;
+      font-weight: 700;
+      padding-top: 50px;
+      color: white;
+    }
+    .section-title span {
+      color: #a855f7;
+    }
+    .contact-section {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 50px 20px;
+      background: radial-gradient(ellipse at center, #222 0%, #000 100%);
+    }
+    .contact-box {
+      width: 100%;
+      max-width: 900px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 20px;
+      overflow: hidden;
+      position: relative;
+    }
+    .map-embed {
+      width: 100%;
+      height: 400px;
+      border: none;
+      filter: brightness(0.7);
+    }
+    .contact-info {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      color: white;
+    }
+    .contact-info p {
+      margin: 10px 0;
+      display: flex;
+      align-items: center;
+      font-size: 0.95rem;
+    }
+    .contact-info i {
+      margin-right: 10px;
+      color: #a855f7;
+    }
+    .social-icons {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      background: #fff;
+      padding: 10px 15px;
+      border-radius: 20px;
+      display: flex;
+      gap: 10px;
+    }
+    .social-icons a {
+      color: #000;
+      font-size: 1rem;
+      transition: 0.3s;
+    }
+    .social-icons a:hover {
+      color: #a855f7;
+    }
+    footer {
+      text-align: center;
+      padding: 20px 0;
+      font-size: 0.8rem;
+      background: #000;
+      color: #ccc;
+    }
+  </style>
+</head>
+<body>
+
+  <h2 class="section-title">Its the right moment to <span>Join Us</span></h2>
+
+  <section class="contact-section">
+    <div class="contact-box">
+      <!-- Embedded Google Map -->
+      <iframe class="map-embed"
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3609.790915046632!2d48.08656627441057!3d29.144392875378913!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3fcf07f793b02d47%3A0x5075415021d4c39e!2sNEXTSEG%20GYM!5e0!3m2!1sen!2skw!4v1720089284731"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+      <!-- Contact Info -->
+      <div class="contact-info">
+        <p><i class="fas fa-envelope"></i> info@nexsteg.com</p>
+        <p><i class="fas fa-phone"></i> +628998772233</p>
+        <p><i class="fas fa-map-marker-alt"></i> Block1 Street 127, Mahboula, KUWAIT</p>
+      </div>
+
+      <!-- Social Icons -->
+      <div class="social-icons">
+        <a href="/"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-tiktok"></i></a>
+        <a href="#"><i class="fab fa-youtube"></i></a>
+      </div>
+    </div>
+  </section>
+    </main>
+
+    <footer class="main-footer">
+        <p>© 2024, All Right Reserved.</p>
+    </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const navToggle = document.querySelector('.nav-toggle');
+            const header = document.querySelector('.main-header');
+            if (navToggle) {
+                navToggle.addEventListener('click', () => {
+                    header.classList.toggle('nav-open');
+                    const isExpanded = navToggle.getAttribute('aria-expanded') === 'true';
+                    navToggle.setAttribute('aria-expanded', !isExpanded);
+                });
+            }
+            const navLinks = document.querySelectorAll('.nav-menu a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (header.classList.contains('nav-open')) {
+                        header.classList.remove('nav-open');
+                        navToggle.setAttribute('aria-expanded', 'false');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

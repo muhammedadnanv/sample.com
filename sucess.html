@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>NEXSTEG Fit Hub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet"/>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      font-family: 'Montserrat', sans-serif;
+      background-color: #000;
+      color: #fff;
+      overflow: hidden;
+    }
+
+    .hero {
+      position: relative;
+      height: 100vh;
+      background: url('https://i.ibb.co/nN7PNJG9/685b4a05068e2ae6a9a7067c9a8c526fc4ae96f0.jpg') center center/cover no-repeat;
+    }
+
+    .hero::before, .hero::after {
+      content: '';
+      position: absolute;
+      width: 150%;
+      height: 150%;
+      top: -25%;
+      left: -25%;
+      transform: rotate(45deg);
+      z-index: 1;
+    }
+
+    .hero::before {
+      background: linear-gradient(to right, #7f00ff 50%, #000 50%);
+      mix-blend-mode: screen;
+      opacity: 0.8;
+    }
+
+    .hero::after {
+      background: linear-gradient(to right, #7f00ff 50%, #000 50%);
+      mix-blend-mode: multiply;
+      opacity: 0.9;
+    }
+
+    nav {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 2rem 4rem;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 800;
+    }
+
+    .logo span {
+      color: #7f00ff;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .nav-links a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 1rem;
+      font-weight: 500;
+    }
+
+    .nav-cta {
+      padding: 0.6rem 1.5rem;
+      border: 2px solid #7f00ff;
+      border-radius: 30px;
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+      background-color: rgba(127, 0, 255, 0.1);
+      box-shadow: 0 0 10px #7f00ff, 0 0 20px #7f00ff inset;
+      backdrop-filter: blur(6px);
+      transition: 0.3s ease;
+    }
+
+    .nav-cta:hover {
+      background-color: #7f00ff;
+    }
+
+    .hero-content {
+      position: absolute;
+      z-index: 2;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      width: 90%;
+      max-width: 700px;
+    }
+
+    .hero-content h1 {
+      font-size: 3.8rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      line-height: 1.2;
+    }
+
+    .watch-btn {
+      display: inline-block;
+      margin-top: 1.2rem;
+      font-size: 1rem;
+      color: #ccc;
+      text-decoration: none;
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1.5rem 2rem;
+      }
+
+      .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .hero-content h1 {
+        font-size: 2.4rem;
+      }
+
+      .nav-cta {
+        margin-top: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <section class="hero">
+    <nav>
+      <div class="logo">NEX<span>STEG</span></div>
+      <div class="nav-links">
+        <a href="/index.html">Home</a>
+        <a href="/aboutus.html">About</a>
+        <a href="/trainers.html">Trainers</a>
+        <a href="/pricing.html">Pricing</a>
+        <a href="/sucess.html">Success Story</a>
+      </div>
+      <a href="https://wa.me/919999999999" class="nav-cta">Join Us Now</a>
+    </nav>
+
+    <div class="hero-content">
+      <h1>Redefining<br>Fitness in<br>Kuwait</h1>
+      <a href="#" class="watch-btn">▶ Watch Our Fitness Journey</a>
+    </div>
+  </section>
+
+  <!-- Video + Intro Section -->
+  <section class="px-6 py-10 lg:flex lg:justify-between lg:items-center">
+    <div class="lg:w-1/2 mb-8 lg:mb-0">
+      <p class="text-lg leading-relaxed max-w-md">
+        At NEXSTEG, every sweat, every rep, every step forward is worth it. Meet the members who took the leap — and never looked back.
+      </p>
+    </div>
+    <div class="lg:w-1/2 flex justify-center">
+      <div class="relative w-full max-w-sm">
+        <img src="https://images.unsplash.com/photo-1594737625785-c5b5c71f0af4" alt="Trainer on treadmill" class="rounded-md w-full object-cover" />
+        <div class="absolute inset-0 flex items-center justify-center">
+          <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center text-black">
+            ▶
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gradient Divider -->
+  <div class="h-1 bg-gradient-to-r from-black via-purple-800 to-black"></div>
+
+  <!-- Transformation Section -->
+  <section class="bg-gradient-to-br from-black via-black to-purple-900 px-6 py-16">
+    <h2 class="text-3xl md:text-4xl font-bold text-purple-500 text-center mb-12">
+      Transformation Stories
+    </h2>
+
+    <div class="lg:flex lg:items-start lg:justify-between gap-12">
+      <!-- Text Content -->
+      <div class="lg:w-1/2 mb-10 lg:mb-0">
+        <h3 class="text-xl font-semibold mb-2">Rana Al-Sabah</h3>
+        <p class="mb-2"><strong>Goal:</strong> Fat Loss & Confidence Boost</p>
+        <p class="mb-2"><strong>Timeframe:</strong> 6 Months</p>
+        <p class="text-sm text-gray-300 mb-4">
+          “When I joined NEXSTEG, I was tired, unmotivated, and stuck in a loop of failed diets. With the support of Coach Aisha and the community here, I lost 14 kg, gained muscle tone, and — more importantly — regained confidence in myself. This place changed my mindset, not just my body.”
+        </p>
+        <p><strong>Training Plan:</strong> HIIT + Nutrition Coaching</p>
+        <p><strong>Trainer:</strong> Aisha Kareem</p>
+      </div>
+
+      <!-- Before/After Images -->
+      <div class="lg:w-1/2 flex justify-center space-x-4">
+        <img src="https://via.placeholder.com/180x320.png?text=Before" alt="Before" class="rounded-md shadow-lg" />
+        <img src="https://via.placeholder.com/180x320.png?text=After" alt="After" class="rounded-md shadow-lg" />
+      </div>
+    </div>
+  </section>
+</body>
+</html>
